@@ -3,6 +3,10 @@ public class Tablero {
     private Nave[][] matrizNaves;      // Guarda el objeto nave en la posición
     private boolean[][] matrizDisparos; // Guarda si ya se disparó ahí
 
+    /**Hoy en clase dimos arrays asi que apartir de eso y de ayuda de gemini hice esta clase, creo que es la clase
+     * más complicada de todo el proyecto pero basicamente con DIM ponemos el tope del tablero, si DIM es 5 entonces
+     * el tablero es un 5x5, la matriz de nave y la matriz de disparo son para saber donde estan las naves y donde
+     * se disparo con anterioridad**/
     public Tablero() {
         this.matrizNaves = new Nave[DIM][DIM];
         this.matrizDisparos = new boolean[DIM][DIM];
