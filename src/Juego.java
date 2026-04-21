@@ -3,26 +3,22 @@ import java.util.Scanner;
 
 public class Juego {
     private Tablero tablero;
-    public Nave nave;
 
     public Juego() {
         this.tablero = new Tablero();
         Scanner teclado = new Scanner(System.in);
-        int x = 0;
-        int y = 0;
         while (Nave.vida > 0) {
             System.out.println("\n--- NUEVO TURNO ---");
             System.out.print("Introduce fila (x): ");
-            x = Integer.parseInt(teclado.nextLine());
+            int x = Integer.parseInt(teclado.nextLine());
             System.out.print("Introduce columna (y): ");
-            y = Integer.parseInt(teclado.nextLine());
+            int y = Integer.parseInt(teclado.nextLine());
             String resultado = lanzarAtaque(x, y);
             System.out.println(resultado);
             System.out.println("Vidas restantes: " + Nave.vida);
         }
         mostrarVictoria();
     }
-
 
     public void mostrarVictoria() {
         System.out.println("\n================================================");
