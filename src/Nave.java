@@ -1,3 +1,4 @@
+/*Clase del enemigo a vencer*/
 public class Nave {
     // Constantes de clase: no cambian y pertenecen a la clase, no a cada nave
     public static final int TOCADO = 1;
@@ -17,7 +18,7 @@ public class Nave {
 
     }
 
-    // Constructor (El __init__)
+    /*Necesario para que haya "gameplay" como tal*/
     public Nave(String nombre, String tipo, int vida) {
         this.nombre = nombre;
         this.tipo = tipo;

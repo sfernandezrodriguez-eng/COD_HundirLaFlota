@@ -1,3 +1,4 @@
+/*Esta es la clase del tablero, es el mapa por asi decirlo*/
 public class Tablero {
     // 1. Constantes (static final para que non cambien e sexan da clase)
     public static final int AGUA = 0;
@@ -8,6 +9,7 @@ public class Tablero {
     private Casilla[][] casillero;
     private int vidasTotais;
 
+    /*Aunque no sea visible en ningun momento el tablero es la pieza mas importante porque todo lo que sucede es dentro de este, para ello necesitamos dividirlo en casillas*/
     public Tablero() {
         // Creamos as naves
         Nave por1 = new Nave("Damian", "portaaviones", 5);

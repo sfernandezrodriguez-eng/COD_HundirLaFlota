@@ -1,16 +1,16 @@
 import java.util.Scanner;
 
+/*Esta es la clase Principal del juego*/
 public class Juego {
     private Tablero tablero;
 
+/*En este constructor se hace todo el juego, se pregunta al jugador x e y, llama a la funcion necesaria para que compruebe esa casilla y se dispara en el
+*  caso de que sea necesaria*/
     public Juego() {
         // Inicializamos o taboleiro (que xa ten as súas naves e vidas totais)
         this.tablero = new Tablero();
         Scanner teclado = new Scanner(System.in);
 
-        /** * O bucle agora consulta ao OBXECTO tablero.
-         * Mentres o taboleiro diga que quedan vidas na flota, o xogo segue.
-         **/
         while (this.tablero.getVidasTotais() > 0) {
             System.out.println("\n--- NUEVO TURNO ---");
             System.out.println("Vidas restantes na flota: " + this.tablero.getVidasTotais());
