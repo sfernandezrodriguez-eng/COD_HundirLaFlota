@@ -1,44 +1,56 @@
 public class Tablero {
-    private final int DIM = 7;
-    private Nave[][] matrizNaves;      // Guarda el objeto nave en la posición
-    private boolean[][] matrizDisparos; // Guarda si ya se disparó ahí
+    // 1. Constantes (static final para que non cambien e sexan da clase)
+    public static final int AGUA = 0;
+    public static final int TOCADO = 1;
+    public static final int HUNDIDO = 2;
 
-    /**Hoy en clase dimos arrays asi que apartir de eso y de ayuda de gemini hice esta clase, creo que es la clase
-     * más complicada de todo el proyecto pero basicamente con DIM ponemos el tope del tablero, si DIM es 5 entonces
-     * el tablero es un 5x5, la matriz de nave y la matriz de disparo son para saber donde estan las naves y donde
-     * se disparo con anterioridad**/
+    // 2. Atributos privados (Encapsulamento)
+    private Casilla[][] casillero;
+    private int vidasTotais;
+
     public Tablero() {
-        this.matrizNaves = new Nave[DIM][DIM];
-        this.matrizDisparos = new boolean[DIM][DIM];
-        this.colocarNavesEjemplo();
+        // Creamos as naves
+        Nave por1 = new Nave("Damian", "portaaviones", 5);
+        Nave fra1 = new Nave("Commit", "fragata", 3);
+        Nave fra2 = new Nave("Push", "fragata", 3);
+        Nave fra3 = new Nave("Un10plis", "fragata", 3);
+        Nave sub1 = new Nave("U-47", "submarino", 1);
+        Nave sub2 = new Nave("U-96", "submarino", 1);
+        Nave sub3 = new Nave("U-505", "submarino", 1);
+        Nave sub4 = new Nave("U-534", "submarino", 1);
+
+        // Calculamos a suma de todas as vidas para saber cando acaba o xogo
+        this.vidasTotais = por1.vida + fra1.vida + fra2.vida +
+                fra3.vida + sub1.vida + sub2.vida +
+                sub3.vida + sub4.vida;
+
+        // 3. Inicializamos o casilleiro
+        this.casillero = new Casilla[][] {
+                {new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla(por1), new Casilla(por1), new Casilla(por1), new Casilla(por1), new Casilla(por1), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla(fra1), new Casilla(fra1), new Casilla(fra1), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla(sub1), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla(fra2), new Casilla(fra2), new Casilla(fra2), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla(fra3), new Casilla(fra3), new Casilla(fra3), new Casilla("agua"), new Casilla("agua"), new Casilla(sub3), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua")},
+                {new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla(sub4), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla("agua"), new Casilla(sub2)}
+        };
     }
 
-    private void colocarNavesEjemplo() {
-        // Creamos una nave de 2 de vida y la ponemos en dos posiciones
-        Nave n1 = new Nave("damian","algo",2);
-        matrizNaves[1][1] = n1;
-        matrizNaves[1][2] = n1;
+    // --- MÉTODOS GETTER ---
+
+    public Casilla[][] getCasillero() {
+        return this.casillero;
     }
 
-    public int recibir_disparo(int x, int y) {
-        // 1. Si ya fue disparada, gestionamos el estado actual
-        if (matrizDisparos[x][y]) {
-            if (matrizNaves[x][y] == null) {
-                return 0; // Agua
-            }
-            // Retorna 3 (Hundido) o 2 (Tocado) según la nave
-            return matrizNaves[x][y].isHundido() ? 3 : 2;
-        }
+    public int getVidasTotais() {
+        return this.vidasTotais;
+    }
 
-        // 2. Primera vez que se dispara
-        matrizDisparos[x][y] = true;
-
-        if (matrizNaves[x][y] == null) {
-            return 0; // Agua
-        } else {
-            // Llamamos al método de la clase Nave que resta vida
-            return matrizNaves[x][y].recibirDisparo();
-        }
+    // Método para restar vida global cando hai un impacto
+    public void reducirVidaGlobal() {
+        this.vidasTotais--;
     }
 }
-

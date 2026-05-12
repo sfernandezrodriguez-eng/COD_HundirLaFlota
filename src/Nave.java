@@ -8,6 +8,15 @@ public class Nave {
     public static int vida;
     private boolean hundido;
 
+    public Nave() {
+        this.nombre = "agua";
+        this.tipo = "ninguno";
+        this.vida = 0;
+        this.hundido = false;
+
+
+    }
+
     // Constructor (El __init__)
     public Nave(String nombre, String tipo, int vida) {
         this.nombre = nombre;
